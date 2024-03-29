@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<div layout:fragment="content">
+	<div class="card card-primary">
+		<div class="card-header">
+			<h3 class="card-title">登録画面</h3>
+		</div>
+		<div class="card-body">
+			<div th:if="${validationError}" th:each="error : ${validationError}">
+				<label class="text-danger" th:text="${error}"></label>
+			</div>
+			<form data-toggle="validator" th:action="@{/user/create}"
+				th:object="${userRequest}" role="form" method="post">
+				<div class="form-group">
+					<label>名前</label> <input type="text" class="form-control"
+						th:field="*{name}">
+				</div>
+				<div class="form-group">
+					<label>住所</label> <input type="text" class="form-control"
+						th:field="*{address}">
+				</div>
+				<div class="form-group">
+					<label>電話番号</label> <input type="text" class="form-control"
+						th:field="*{phone}">
+				</div>
+				<div>
+					<button type="submit" class="btn btn-primary">新規登録</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</html>
