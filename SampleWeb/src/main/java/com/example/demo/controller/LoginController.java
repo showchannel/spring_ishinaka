@@ -1,18 +1,28 @@
 package com.example.demo.controller;
 
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.constant.ErrorMessageConst;
 import com.example.demo.form.LoginForm;
+import com.example.demo.service.LoginServise;
+import com.example.demo.util.AppUtil;
 
+import lombok.RequiredArgsConstructor;
+
+/*ログイン画面コントローラー*/
 @Controller
+@RequiredArgsConstructor
 public class LoginController {
 
-	private static final String LOGIN_ID = "user";
-
-	private static final String PASSWORD = "pwd";
+	/*ログイン画面 Service*/
+	private final LoginServise service;
+	
+	/*メッセージソース*/
+	private final MessageSource messageSource;
 
 	@GetMapping("/login")
 	public String view(Model model, LoginForm form) {
@@ -21,13 +31,14 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String login(Model model, LoginForm form) {
-		var isCorrectUserAuth = form.getLoginId().equals(LOGIN_ID)
-				&& form.getPassword().equals(PASSWORD);
+		var userInfo = service.searchUserById(form.getLoginId());
+		var isCorrectUserAuth = userInfo.isPresent() 
+				&& form.getPassword().equals(userInfo.get().getPassword());
 		if (isCorrectUserAuth) {
 			return "redirect:/menu";
 		} else {
-			
-			model.addAttribute("errorMsg", "ログインIDかパスワードが間違っていますよ");
+			var errorMsg = AppUtil.getMessage(messageSource,ErrorMessageConst.LOGIN_WRONG_INPUT);
+			model.addAttribute("errorMsg", errorMsg);
 			return "login";
 		}
 
