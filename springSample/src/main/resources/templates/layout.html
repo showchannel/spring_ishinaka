@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">SpringBoot
+	AdminLTE3</title>
+<meta
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+	name="viewport" />
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback" />
+<link rel="stylesheet"
+	href="/adminlte/plugins/fontawesome-free/css/all.min.css" />
+<link rel="stylesheet"
+	href="/adminlte/dist/css/adminlte.min.css?v=3.2.0" />
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div style="min-height: 878.047px;">
+		<div th:replace="fragments/header"></div>
+		<aside class="main-sidebar">
+			<div th:replace="fragments/mainsidebar"></div>
+		</aside>
+		<div class="content-wrapper">
+			<section class="content-header" layout:fragment="header"></section>
+			<section class="content">
+
+				<div th:if="${successFlash != null}"
+					class="alert alert-success alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-hidden="true">×</button>
+					<h5>
+						<i class="icon fas fa-check"></i> 成功
+					</h5>
+					<a th:text="${successFlash}"></a>
+				</div>
+
+				<div layout:fragment="content"></div>
+			</section>
+		</div>
+	</div>
+	<div th:replace="fragments/footer"></div>
+</body>
+
+<script src="/adminlte/plugins/jquery/jquery.min.js"></script>
+<script src="/adminlte/dist/js/adminlte.js?v=3.2.0"></script>
+<script src="/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</html>

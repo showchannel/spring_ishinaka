@@ -9,11 +9,11 @@ import lombok.Data;
 public class SignupForm {
 	
 	/**ログインID*/
-	@Length(min=8,max=20)
+	@Length(min=1,max=20)
 	private String loginId;
 	
 	/**パスワード*/
-	@Length(min=8,max=20)
+	@Length(min=1,max=20)
 	private String password;
 
 }
