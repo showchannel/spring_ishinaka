@@ -39,7 +39,7 @@ public class LoginController {
 	@GetMapping(value = UrlConst.LOGIN,params = "error")
 	public String viewWithError(Model model, LoginForm form) {
 		var errorInfo = (Exception) session.getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-		
+		model.addAttribute("errorMsg", errorInfo.getMessage());
 		return "login";
 	}
 	
