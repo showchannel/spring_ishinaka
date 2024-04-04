@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.constant.SignupMessage;
-import com.example.demo.constant.UrlConst;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.form.SignupForm;
 import com.example.demo.service.SignupServise;
@@ -24,38 +23,51 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SignupController {
 
-	/*ログイン画面 Service*/
+	/* ログイン画面 Service */
+
 	private final SignupServise service;
 
-	/*ログイン画面 Service*/
+	/* ログイン画面 Service */
 	private final SignupServise EXISTED_LOGIN_ID;
 
-	/**メッセージソース*/
+	/** メッセージソース */
+
 	private final MessageSource messageSource;
 
-	@GetMapping(UrlConst.SIGNUP)
+	@GetMapping("/signup")
 	public String view(Model model, SignupForm form) {
 		return "signup";
 	}
 
 	/**
 	 * ユーザー登録
+	 * 
 	 * @param modelモデル
 	 * @param form入力情報
 	 * @param bdResult入力チェック
 	 * @return 表示画面
 	 */
 
-	@PostMapping(UrlConst.SIGNUP)
+	@PostMapping("/signup")
 	public void signup(Model model, @Validated SignupForm form, BindingResult bdResult) {
-		if (bdResult.hasErrors()) {
-			return;
-		}
+
 		var userInfoOpt = service.resistUserInfo(form);
 		var signupMessage = judgeMessageKey(userInfoOpt);
 		var messageId = AppUtil.getMessage(messageSource, signupMessage.getMessageId());
 		model.addAttribute("message", messageId);
 		model.addAttribute("isError", signupMessage.isError());
+		if (bdResult.hasErrors()) {
+			return;
+		}
+
+		/*
+		 * var signupMessage = judgeMessageKey(userInfoOpt); var messageId =
+		 * AppUtil.getMessage(messageSource, signupMessage.getMessageId());
+		 */
+
+		/* model.addAttribute("message", messageId); */
+
+		/* model.addAttribute("isError", signupMessage.isError()); */
 	}
 
 	private SignupMessage judgeMessageKey(Optional<UserInfo> userInfoOpt) {
@@ -65,4 +77,13 @@ public class SignupController {
 			return SignupMessage.SUCCEED;
 		}
 	}
+
+	/*
+	 * private SignupMessage judgeMessageKey(Optional<UserInfo> userInfoOpt) { if
+	 * (userInfoOpt.isEmpty()) { return SignupMessage.EXISTED_LOGIN_ID; } else {
+	 * return SignupMessage.SUCCEED; }
+	 * 
+	 * var userInfo = service.resistUserInfo(form); }
+	 */
+
 }
