@@ -22,7 +22,6 @@ public class SignupServise {
 	private final Mapper mapper;
 
 	/** PasswordEncoder */
-
 	private final PasswordEncoder passwordEncoder;
 
 	/**

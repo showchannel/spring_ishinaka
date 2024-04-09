@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.constant.SignupMessage;
+import com.example.demo.constant.UrlConst;
 import com.example.demo.entity.UserInfo;
 import com.example.demo.form.SignupForm;
 import com.example.demo.service.SignupServise;
@@ -34,7 +35,7 @@ public class SignupController {
 
 	private final MessageSource messageSource;
 
-	@GetMapping("/signup")
+	@GetMapping(UrlConst.SIGNUP)
 	public String view(Model model, SignupForm form) {
 		return "signup";
 	}
@@ -48,17 +49,17 @@ public class SignupController {
 	 * @return 表示画面
 	 */
 
-	@PostMapping("/signup")
+	@PostMapping(UrlConst.SIGNUP)
 	public void signup(Model model, @Validated SignupForm form, BindingResult bdResult) {
 
+		if (bdResult.hasErrors()) {
+			return;
+		}
 		var userInfoOpt = service.resistUserInfo(form);
 		var signupMessage = judgeMessageKey(userInfoOpt);
 		var messageId = AppUtil.getMessage(messageSource, signupMessage.getMessageId());
 		model.addAttribute("message", messageId);
 		model.addAttribute("isError", signupMessage.isError());
-		if (bdResult.hasErrors()) {
-			return;
-		}
 
 		/*
 		 * var signupMessage = judgeMessageKey(userInfoOpt); var messageId =
