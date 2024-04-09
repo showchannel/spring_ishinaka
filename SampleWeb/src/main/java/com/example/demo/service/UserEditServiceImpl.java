@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.constant.UserEditMessage;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
  *
  */
 @Service
+@Component
 @RequiredArgsConstructor
 public abstract class UserEditServiceImpl implements UserEditService {
 

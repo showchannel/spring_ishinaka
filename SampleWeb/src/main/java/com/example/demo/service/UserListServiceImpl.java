@@ -56,7 +56,7 @@ public class UserListServiceImpl implements UserListService {
 
 	/* 変更済み */
 	public List<UserListInfo> editUserListByParam(UserSearchInfo dto) {
-		var userInfo = mapper.map(dto,UserInfo.class);
+		var userInfo = mapper.map(dto, UserInfo.class);
 		return toUserListInfos(findUserInfoByParam(userInfo));
 	}
 
@@ -70,7 +70,7 @@ public class UserListServiceImpl implements UserListService {
 		var loginIdParam = AppUtil.addWildcard(userInfo.getLoginId());
 		return repository.findByLoginIdLike(loginIdParam);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */

@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.example.demo.constant.ExcuteResult;
 import com.example.demo.dto.UserListInfo;
 import com.example.demo.dto.UserSearchInfo;
@@ -12,6 +14,7 @@ import com.example.demo.dto.UserSearchInfo;
  * @author ys-fj
  *
  */
+@Service
 public interface UserListService {
 
 	/**

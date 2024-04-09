@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.demo.constant.UrlConst;
 import com.example.demo.constant.ViewNameConst;
+import com.example.demo.service.UserEditService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class UserEditController {
 
 	/** ユーザー編集画面Serviceクラス */
-	/* private final UserEditService service; */
+	private final UserEditService service;
 
 	/** セッションオブジェクト */
 	private final HttpSession session;
