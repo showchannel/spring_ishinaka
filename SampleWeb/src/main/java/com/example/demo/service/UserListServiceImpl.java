@@ -6,7 +6,6 @@ import java.util.List;
 import org.dozer.Mapper;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.constant.ExcuteResult;
 import com.example.demo.dto.UserListInfo;
 import com.example.demo.dto.UserSearchInfo;
 import com.example.demo.entity.UserInfo;
@@ -74,13 +73,10 @@ public class UserListServiceImpl implements UserListService {
 	/**
 	 * {@inheritDoc}
 	 */
-	@Override
-	public ExcuteResult deleteUserInfoById(String loginId) {
-		var userInfo = repository.findById(loginId);
-		if (userInfo.isEmpty()) {
-			return ExcuteResult.ERROR;
-		}
-		repository.deleteById(loginId);
-		return ExcuteResult.SUCCEED;
-	}
+	/*
+	 * @Override public ExcuteResult deleteUserInfoById(String loginId) { var
+	 * userInfo = repository.findById(loginId); if (userInfo.isEmpty()) { return
+	 * ExcuteResult.ERROR; } repository.deleteById(loginId); return
+	 * ExcuteResult.SUCCEED; }
+	 */
 }
