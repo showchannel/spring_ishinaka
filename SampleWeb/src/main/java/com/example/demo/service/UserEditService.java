@@ -2,9 +2,6 @@ package com.example.demo.service;
 
 import java.util.Optional;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-
 import com.example.demo.dto.UserEditResult;
 import com.example.demo.dto.UserUpdateInfo;
 import com.example.demo.entity.UserInfo;
@@ -15,9 +12,8 @@ import com.example.demo.entity.UserInfo;
  * @author ys-fj
  *
  */
-@Service
-@Component
 public interface UserEditService {
+
 	/**
 	 * ログインIDを使ってユーザー情報テーブルを検索し、検索結果を返却します。
 	 * 
